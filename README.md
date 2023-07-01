@@ -17,10 +17,10 @@ After submitting the form, all values should print at the console (** Blue text 
 
 ### Challenges
 
-- Finding item function from input array. (no Math.max)
+- Finding highest item function from input array. (no Math.max)
 - Sorting array function. (no Array.sort)
-- Finding highest age item from input array. (specific src)
-- Sorting age item (most to lease or lease to most) from input array. (specific src)
+- Finding highest age item from input array.
+- Sorting age item (most to lease or lease to most) from input array. 
 - Finding highest age, salary and children from input array. (user provided self) 
 
 

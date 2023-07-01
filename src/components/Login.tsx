@@ -1,15 +1,23 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-interface Login {
+interface SignIn {
     email: string, password: string, isPassword: boolean
+}
+interface SignInErr {
+    isErr: boolean, txt: string
 }
 
 const Login = () => {
-    const [values, setValues] = useState<Login>({
+    const [values, setValues] = useState<SignIn>({
         email: '', password: '', isPassword: true
     });
+    const [isLoginErr, setLoginErr] = useState({
+        isErr: false, txt: ''
+    });
+    let navigate = useNavigate();
 
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -32,11 +40,15 @@ const Login = () => {
 
         try {
             const res = await axios(config);
+            console.log(res.data);
             switch(res.data.status) {
                 case true:
+                    setLoginErr({...isLoginErr, isErr: false});
                     Cookies.set(`${process.env.REACT_APP_TITLE}_token`, res.data.token, {sameSite: 'strict'});
+                    navigate('/home');
                     break;
                 case false: default:
+                    setLoginErr({isErr: true, txt: res.data.msg});
                     break;
             }
         } catch (err) {
@@ -63,7 +75,8 @@ const Login = () => {
 
                     <button type="submit" className="p-2 pl-5 pr-5 m-auto block rounded-lg bg-blue-500 text-white">Login</button>
                 </form>
-                <p className="text-center">No Account? <a href="/register"><button type="button" className="p-2  rounded-lg bg-orange-500 text-white">Register</button></a></p>
+                <p className="text-center">No Account? <a href="/signup"><button type="button" className="p-2  rounded-lg bg-orange-500 text-white">Register</button></a></p>
+                {isLoginErr.isErr && (<p className="mt-2 text-center text-red-600">{isLoginErr.txt}</p>)}
             </div>
 
 

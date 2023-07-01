@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Regis {
     gender: string, fname: string, lname: string, address: string, postcode: number | string, email: string, password: string, tel: number | string, isPassword:boolean, isAcceptTerm: boolean
@@ -18,6 +19,7 @@ const Signup = () => {
         isPassword: true,
         isAcceptTerm: false,
     });
+    let navigate = useNavigate();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,8 +53,7 @@ const Signup = () => {
 
                     switch (res.data.status) {
                         case true:
-                            //navigate('/login');
-
+                            navigate('/login');
                             break;
                         default:
                             break;
