@@ -1,4 +1,4 @@
-# Abount this project 'Login Signup' Mockup
+# About this project 'Login Signup' Mockup
 
 Created by reactjs, typescript, tailwind
 
